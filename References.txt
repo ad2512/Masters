@@ -1,0 +1,5 @@
+REFERENCES
+
+http://neuralnetworksanddeeplearning.com/chap6.html
+http://cs231n.github.io/convolutional-networks/
+http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
