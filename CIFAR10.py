@@ -23,16 +23,17 @@ from numpy import append, array, int8, uint8, zeros
 
 # Setting up the data
 (train, labels_1), (test, labels_2) = cifar10.load_data()
+train = train.astype('float32')
+test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2 = np_utils.to_categorical(labels_2)
 
 
 # Building Model
 model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,32,32)))
-model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Convolution2D(64,3,3,init='uniform',border_mode='full',input_shape=(3,32,32)))
 model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
+model.add(Convolution2D(64, 3, 3))
 model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
@@ -45,6 +46,7 @@ model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(200))
 model.add(Activation('relu'))
+model.add(Dropout(0.25))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
@@ -52,7 +54,7 @@ model.add(Activation('softmax'))
 sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=30,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
 
