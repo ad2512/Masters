@@ -52,7 +52,7 @@ model.add(Activation('softmax'))
 sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
 
