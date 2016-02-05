@@ -32,6 +32,7 @@ labels_2 = np_utils.to_categorical(labels_2)
 # Building Model
 model = Sequential()
 model.add(Convolution2D(64,3,3,init='uniform',border_mode='full',input_shape=(3,32,32)))
+model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Activation('tanh'))
 model.add(Convolution2D(64, 3, 3))
 model.add(Activation('tanh'))
