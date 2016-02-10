@@ -50,5 +50,6 @@ model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 model2 = Sequential()
 model2.add(Convolution2D(8,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model2.add(Activation('relu'))
+model2.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 activations = model2.predict(train[1:4])
 
