@@ -16,7 +16,9 @@ from theano.tensor.nnet import sigmoid
 from theano.tensor import tanh
 
 # Importing Data
+print "Importing Data"
 data = np.loadtxt("bigdata.dat")
+print "Data Imported"
 nz = (data[:,0]==-1)
 data = data[nz==0,:]
 ny = (data[:,0]==25)
