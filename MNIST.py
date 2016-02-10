@@ -32,14 +32,13 @@ labels_2 = np_utils.to_categorical(labels_2)
 
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
 model = Sequential()
-model.add(Convolution2D(15,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
-model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Convolution2D(8,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model.add(Activation('relu'))
-model.add(Convolution2D(15,2,2))
 model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Convolution2D(16,5,5))
 model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(3,3)))
 model.add(Flatten())
-model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
