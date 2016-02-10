@@ -7,7 +7,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.datasets import mnist
-from keras.optimizers import SGD
+from keras.optimizers import SGD, RMSprop
 from keras.utils import np_utils, generic_utils
 from theano.tensor.nnet import conv
 from theano.tensor.nnet import softmax
