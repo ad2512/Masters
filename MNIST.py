@@ -32,24 +32,22 @@ labels_2 = np_utils.to_categorical(labels_2)
 
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
 model = Sequential()
-model.add(Convolution2D(8,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
+model.add(Convolution2D(15,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Convolution2D(16,5,5))
+model.add(Convolution2D(15,2,2))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(3,3)))
+model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
+model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-#sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
-#model.fit(train, labels_1, batch_size=200, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=200, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
-model2 = Sequential()
-model2.add(Convolution2D(8,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
-model2.add(Activation('relu'))
-model2.compile(loss='categorical_crossentropy', optimizer='rmsprop')
-activations = model2.predict(train[1:4])
+
+
 
