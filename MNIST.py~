@@ -34,7 +34,7 @@ print "Dropout = 0.2"
 model = Sequential()
 model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model.add(Activation('relu'))
-model.add(ZeroPadding2d((1,1))
+model.add(ZeroPadding2D((1,1))
 model.add(Convolution2D(16,2,2))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
