@@ -40,11 +40,11 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
 model.add(Dense(100))
-model.add(Dropout(0.2))
+model.add(Dropout(0.6))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.003, decay=0.0001,nestorov=True)
+sgd = SGD(lr=0.003, decay=0.0002,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
