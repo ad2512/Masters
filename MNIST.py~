@@ -1,4 +1,6 @@
 import cPickle
+from __future__ import absolute_import
+from __future__ import print_function
 import gzip
 import numpy as np
 import theano
@@ -15,8 +17,6 @@ from theano.tensor import shared_randomstreams
 from theano.tensor.signal import downsample
 from theano.tensor.nnet import sigmoid
 from theano.tensor import tanh
-from __future__ import absolute_import
-from __future__ import print_function
 import pylab as pl
 import matplotlib.cm as cm
 import os, struct
@@ -32,7 +32,7 @@ test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2 = np_utils.to_categorical(labels_2)
 
-print "Dropout = 0.2"
+
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
 model = Sequential()
 model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))

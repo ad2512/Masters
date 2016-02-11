@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import cPickle
 import gzip
 import numpy as np
@@ -15,8 +17,6 @@ from theano.tensor import shared_randomstreams
 from theano.tensor.signal import downsample
 from theano.tensor.nnet import sigmoid
 from theano.tensor import tanh
-from __future__ import absolute_import
-from __future__ import print_function
 import pylab as pl
 import matplotlib.cm as cm
 import os, struct
