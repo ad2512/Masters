@@ -44,7 +44,7 @@ model.add(Dropout(0.1))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.005, decay=0.0005, momentum=0.1,nestorov=True)
+sgd = SGD(lr=0.005, decay=0.0005, momentum=0.05,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
