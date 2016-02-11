@@ -44,7 +44,7 @@ model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.03, decay=0.0005,nestorov=True)
+sgd = SGD(lr=0.01, decay=0.0005,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
@@ -66,7 +66,7 @@ model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.003, decay=0.0005,nestorov=True)
+sgd = SGD(lr=0.01, decay=0.0005,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
@@ -88,7 +88,7 @@ model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.003, decay=0.0005,nestorov=True)
+sgd = SGD(lr=0.01, decay=0.0005,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
@@ -111,7 +111,7 @@ model.add(Dense(100))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.003, decay=0.0005,nestorov=True)
+sgd = SGD(lr=0.01, decay=0.0005,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
