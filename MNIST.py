@@ -22,6 +22,7 @@ import matplotlib.cm as cm
 import os, struct
 from array import array as pyarray
 from numpy import append, array, int8, uint8, zeros
+from matplotlib.pyplot import imshow
 
 # Setting up the data
 (train, labels_1), (test, labels_2) = mnist.load_data()
