@@ -57,7 +57,7 @@ model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
-model.add(Dropout(0.6))
+model.add(Dropout(0.2))
 model.add(Dense(10))
 model.add(Activation('softmax'))
 
@@ -65,6 +65,6 @@ model.add(Activation('softmax'))
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
