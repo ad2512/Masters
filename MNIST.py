@@ -33,10 +33,7 @@ test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2 = np_utils.to_categorical(labels_2)
 
-inpic = train[0][0]
-imshow(train[0][0])
-l = Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28))
-imshow(l.activation(inpic))
+
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
 # model = Sequential()
 # model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
@@ -55,18 +52,18 @@ imshow(l.activation(inpic))
 # model.add(Dense(10))
 # model.add(Activation('softmax'))
 
-# model = Sequential()
-# model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
-# model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=(2,2)))
-# model.add(Flatten())
-# model.add(Dropout(0.25))
-# model.add(Dense(10))
-# model.add(Activation('softmax'))
+model = Sequential()
+model.add(Convolution2D(16,2,2,init='uniform',border_mode='valid',input_shape=(1,28,28)))
+model.add(Activation('sigmoid'))
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Flatten())
+model.add(Dropout(0.25))
+model.add(Dense(10))
+model.add(Activation('softmax'))
 
 #sgd = SGD(lr=0.003, decay=0.0002,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
-# model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
+model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
 # model.fit(train, labels_1, batch_size=300, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
