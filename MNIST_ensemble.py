@@ -32,6 +32,7 @@ test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
+nb=5
 
 # Building Model - Model 1
 model1 = Sequential()
@@ -52,7 +53,7 @@ model1.add(Dropout(0.5))
 model1.add(Dense(10))
 model1.add(Activation('softmax'))
 model1.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model1.fit(train, labels_1, batch_size=300, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model1.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes1 = model1.predict_classes(test, batch_size=300)
 
 # Building Model - Model 2
@@ -74,7 +75,7 @@ model2.add(Dropout(0.5))
 model2.add(Dense(10))
 model2.add(Activation('softmax'))
 model2.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model2.fit(train, labels_1, batch_size=300, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model2.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes2 = model2.predict_classes(test, batch_size=300)
 
 # Building Model - Model 3
@@ -96,7 +97,7 @@ model3.add(Dropout(0.5))
 model3.add(Dense(10))
 model3.add(Activation('softmax'))
 model3.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model3.fit(train, labels_1, batch_size=300, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model3.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes3 = model3.predict_classes(test, batch_size=300)
 
 # Building Model - Model 4
@@ -115,7 +116,7 @@ model4.add(Dropout(0.5))
 model4.add(Dense(10))
 model4.add(Activation('softmax'))
 model4.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model4.fit(train, labels_1, batch_size=300, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model4.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes4 = model4.predict_classes(test, batch_size=300)
 
 
@@ -138,11 +139,11 @@ model5.add(Dropout(0.5))
 model5.add(Dense(10))
 model5.add(Activation('softmax'))
 model5.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model5.fit(train, labels_1, batch_size=300, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model5.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes5 = model5.predict_classes(test, batch_size=300)
 
 # Calculating modes
-classes_final = []
+classes_final = np.empty(10000,1)
 for i in range(10000):
 	from collections import Counter
 	c = Counter([classes1[i],classes2[i],classes3[i],classes4[i],classes5[i]])
