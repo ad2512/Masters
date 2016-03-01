@@ -66,4 +66,4 @@ print(np.size(labels_2))
 for i in range(10000):
 	if(classes[i]!=labels_2[i]):
 		print(i,classes[i],labels_2[i])
-		np.save("Matrices.txt",test[i])
+		np.savetxt('Matrices2', test[i], delimiter=',')
