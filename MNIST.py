@@ -65,4 +65,4 @@ print(np.size(classes))
 print(np.size(labels_2))
 for i in range(10000):
 	if(classes[i]!=labels_2[i]):
-		print(i,classes[i])
+		print(i,classes[i],labels_2[i])
