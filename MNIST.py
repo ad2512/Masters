@@ -53,7 +53,7 @@ labels_2 = np_utils.to_categorical(labels_2)
 # model.add(Dense(10))
 # model.add(Activation('softmax'))
 
-# model = Sequential()
+model = Sequential()
 model.add(Convolution2D(16,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(3,3)))
