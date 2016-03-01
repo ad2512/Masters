@@ -44,7 +44,7 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
 model.add(Dropout(0.5))
-model.add(Dense(2000))
+model.add(Dense(1000))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1000))
@@ -57,6 +57,6 @@ model.add(Activation('softmax'))
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=500,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
