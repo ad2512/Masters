@@ -145,7 +145,7 @@ for i in range(10000):
 	
 count = 0
 for i in range(10000):
-    print(classes_final[i],labels_2[i])
+	print(classes_final[i],labels_2[i])
 	if(classes_final[i]!=labels_2[i]):
 		count = count + 1/10000
 		
