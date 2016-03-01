@@ -32,7 +32,7 @@ test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
-nb=5
+nb=1
 
 # Building Model - Model 1
 model1 = Sequential()
@@ -130,12 +130,6 @@ model5.add(Activation('relu'))
 model5.add(MaxPooling2D(pool_size=(2,2)))
 model5.add(Flatten())
 model5.add(Dropout(0.5))
-model5.add(Dense(1000))
-model5.add(Activation('relu'))
-model5.add(Dropout(0.5))
-model5.add(Dense(1000))
-model5.add(Activation('relu'))
-model5.add(Dropout(0.5))
 model5.add(Dense(10))
 model5.add(Activation('softmax'))
 model5.compile(loss='categorical_crossentropy', optimizer="RMSprop")
@@ -143,7 +137,7 @@ model5.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=
 classes5 = model5.predict_classes(test, batch_size=300)
 
 # Calculating modes
-classes_final = np.empty(10000,1)
+classes_final = np.empty([10000,1])
 for i in range(10000):
 	from collections import Counter
 	c = Counter([classes1[i],classes2[i],classes3[i],classes4[i],classes5[i]])
