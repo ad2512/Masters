@@ -151,5 +151,5 @@ for i in range(10000):
 		print("Error")
 		count = count + 1
 		
-print(count/10000)
+print(count)
 print(count2)
