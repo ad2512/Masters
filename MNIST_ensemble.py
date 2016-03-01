@@ -146,7 +146,7 @@ for i in range(10000):
 count = 0
 count2 = 0
 for i in range(10000):
-	count2 = abs(classes_final_[i]-labels_2[i])
+	count2 = abs(classes_final[i]-labels_2[i])
 	if(classes_final[i]!=labels_2[i]):
 		count = count + 1/10000
 		
