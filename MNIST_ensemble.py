@@ -32,7 +32,7 @@ test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
-nb=1
+nb=2
 
 # Building Model - Model 1
 model1 = Sequential()
@@ -148,8 +148,7 @@ count2 = 0
 for i in range(10000):
 	count2 = count2 + abs(classes_final[i]-labels_2[i])
 	if(classes_final[i]!=labels_2[i]):
-		print("Error")
 		count = count + 1
-		
+
+count = 1-count*0.0001		
 print(count)
-print(count2)
