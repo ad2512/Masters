@@ -35,24 +35,6 @@ labels_2 = np_utils.to_categorical(labels_2)
 
 
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
-# model = Sequential()
-# model.add(Convolution2D(16,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
-# model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=(2,2)))
-# model.add(Convolution2D(32,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
-# model.add(Activation('relu'))
-# model.add(MaxPooling2D(pool_size=(2,2)))
-# model.add(Flatten())
-# model.add(Dropout(0.5))
-# model.add(Dense(1000))
-# model.add(Activation('relu'))
-# model.add(Dropout(0.5))
-# model.add(Dense(1000))
-# model.add(Activation('relu'))
-# model.add(Dropout(0.5))
-# model.add(Dense(10))
-# model.add(Activation('softmax'))
-
 model = Sequential()
 model.add(Convolution2D(16,5,5,init='uniform',border_mode='valid',input_shape=(1,28,28)))
 model.add(Activation('relu'))
@@ -62,13 +44,23 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Flatten())
 model.add(Dropout(0.5))
+model.add(Dense(1000))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+model.add(Dense(1000))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
 model.add(Dense(10))
 model.add(Activation('softmax'))
+
 
 #sgd = SGD(lr=0.003, decay=0.0002,nestorov=True)
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=500,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
-
+classes = model.predict_classes(test, batch_size=300)
+for i in range(10000):
+	if(classes[i]!=labels_2[i])
+		print(i)
