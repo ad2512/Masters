@@ -31,7 +31,7 @@ train = train.astype('float32')
 test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
-labels_2 = np_utils.to_categorical(labels_2)
+labels_2a = np_utils.to_categorical(labels_2)
 
 
 # Building Model - Note that model.add(Activation('relu')) doesn't work when it should. Problem with dimensions
@@ -58,11 +58,11 @@ model.add(Activation('softmax'))
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 
 classes = model.predict_classes(test, batch_size=300)
 print(np.size(classes))
 print(np.size(labels_2))
 for i in range(10000):
-	if(classes[i]!=labels_2[i]):
+	if(classes[i]!=labels_2a[i]):
 		print(i)
