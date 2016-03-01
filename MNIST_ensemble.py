@@ -142,11 +142,12 @@ for i in range(10000):
 	from collections import Counter
 	c = Counter([classes1[i],classes2[i],classes3[i],classes4[i],classes5[i]])
 	classes_final[i] = max(c.items(), key=lambda x:x[1])[0]
-	
+
+classes_final[1:10]=1	
 count = 0
 count2 = 0
 for i in range(10000):
-	count2 = abs(classes_final[i]-labels_2[i])
+	count2 = count2 + abs(classes_final[i]-labels_2[i])
 	if(classes_final[i]!=labels_2[i]):
 		count = count + 1/10000
 		
