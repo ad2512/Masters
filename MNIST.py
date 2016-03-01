@@ -62,5 +62,5 @@ model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=Tr
 
 classes = model.predict_classes(test, batch_size=300)
 for i in range(10000):
-	if(classes[i]!=labels_2[i])
+	if(classes[i]!=labels_2[i]):
 		print(i)
