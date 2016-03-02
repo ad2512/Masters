@@ -32,7 +32,7 @@ test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
-nb=5
+nb=1
 
 # Building Model - Model 1
 model1 = Sequential()
@@ -138,7 +138,7 @@ model4.add(Activation('relu'))
 model5.add(Dropout(0.5))
 model5.add(Dense(10))
 model5.add(Activation('softmax'))
-model5.compile(loss='mse', optimizer="sgd")
+model5.compile(loss='mse', optimizer='adagrad')
 model5.fit(train, labels_1, batch_size=300, nb_epoch=nb,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes5 = model5.predict_classes(test, batch_size=300)
 
