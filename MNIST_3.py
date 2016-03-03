@@ -280,7 +280,7 @@ classesb = modelb.predict_classes(test, batch_size=300)
 classes_final = np.empty([10000,1])
 for i in range(10000):
 	from collections import Counter
-	c = Counter([classes1[i],classes2[i],classes3[i],classes4[i],classes5[i],classes6[i],classes7[i],classes8[i],classes9[i],classesa[i]],classesb[i])
+	c = Counter([classes1[i],classes2[i],classes3[i],classes4[i],classes5[i],classes6[i],classes7[i],classes8[i],classes9[i],classesa[i],classesb[i]])
 	classes_final[i] = max(c.items(), key=lambda x:x[1])[0]
 	
 count = 0
