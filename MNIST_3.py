@@ -32,7 +32,7 @@ test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
-nb=25
+nb=100
 
 # Building Model - Model 1
 model1 = Sequential()
