@@ -64,7 +64,7 @@ classes = model.predict_classes(test, batch_size=300)
 print(np.size(classes))
 print(np.size(labels_2))
 with open('Matrices.csv','a') as f:
-for i in range(10000):
-	if(classes[i]!=labels_2[i]):
-		print(i,classes[i],labels_2[i])
-		np.savetxt(f, test[i], delimiter=',',fmt="%3i")
+	for i in range(10000):
+		if(classes[i]!=labels_2[i]):
+			print(i,classes[i],labels_2[i])
+			np.savetxt(f, test[i], delimiter=',',fmt="%3i")
