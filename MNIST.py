@@ -68,3 +68,5 @@ with open('Matrices.csv','a') as f:
 		if(classes[i]!=labels_2[i]):
 			print(i,classes[i],labels_2[i])
 			np.savetxt(f, test[i], delimiter=',',fmt='%s')
+			
+f.close()
