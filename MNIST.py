@@ -63,7 +63,8 @@ model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=Tr
 classes = model.predict_classes(test, batch_size=300)
 print(np.size(classes))
 print(np.size(labels_2))
+with open('Matrices.csv','a') as f:
 for i in range(10000):
 	if(classes[i]!=labels_2[i]):
 		print(i,classes[i],labels_2[i])
-		np.savetxt('Matrices',i,'.csv', test[i], delimiter=',',fmt="%3i")
+		np.savetxt(f, test[i], delimiter=',',fmt="%3i")
