@@ -28,6 +28,7 @@ from matplotlib.pyplot import imshow
 (train, labels_1), (test, labels_2) = mnist.load_data()
 train = train.reshape(60000,1,28,28)
 train = train.astype('float32')
+test_r=test
 test = test.reshape(10000,1,28,28)
 test = test.astype('float32')
 labels_1 = np_utils.to_categorical(labels_1)
@@ -67,6 +68,6 @@ with open('Matrices.csv','a') as f:
 	for i in range(10000):
 		if(classes[i]!=labels_2[i]):
 			print(i,classes[i],labels_2[i])
-			np.savetxt(f, np.asarray([[1,2,3],[4,5,6]]),delimiter=',',fmt='%s',newline='\n')
+			np.savetxt(f, test_r[i].astype(int),delimiter=',',fmt='%s',newline='\n')
 			
 f.close()
