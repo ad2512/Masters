@@ -74,7 +74,7 @@ f.close()
 with open('Misclassifications.csv','a') as g:
 	for i in range(10000):
 		if(classes[i]!=labels_2[i]):
-			a = [classes[i],labels_2[i]]
+			a = np.asarray([classes[i],labels_2[i]])
 			np.savetxt(f, a.astype(int),delimiter=',',fmt='%s')
 			
 g.close()
