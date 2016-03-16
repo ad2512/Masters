@@ -59,7 +59,7 @@ model.add(Activation('softmax'))
 #rms = RMSprop(lr=0.001, rho=0.95, epsilon=1e-15)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 
-model.fit(train, labels_1, batch_size=300, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(train, labels_1, batch_size=300, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 
 classes = model.predict_classes(test, batch_size=300)
 print(np.size(classes))
@@ -74,6 +74,6 @@ with open('Misclassifications.csv','a') as g:
 	for i in range(10000):
 		if(classes[i]!=labels_2[i]):
 			a = np.asarray([classes[i],labels_2[i]])
-			np.savetxt(g, a.astype(int),delimiter=',',fmt='%s')
+			np.savetxt(g, a,delimiter=',',fmt='%s')
 			
 g.close()
