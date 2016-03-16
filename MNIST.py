@@ -67,6 +67,6 @@ with open('Matrices.csv','a') as f:
 	for i in range(10000):
 		if(classes[i]!=labels_2[i]):
 			print(i,classes[i],labels_2[i])
-			np.savetxt(f, np.asarray([[1,2,3],[4,5,6]]),fmt='%s')
+			np.savetxt(f, np.asarray(test[i]),delimiter=',',fmt='%s')
 			
 f.close()
