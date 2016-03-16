@@ -66,13 +66,13 @@ print(np.size(classes))
 print(np.size(labels_2))
 with open('Matrices.csv','a') as f:
 	for i in range(10000):
-		if(classes[i]!=labels_2[i]):
+		#if(classes[i]!=labels_2[i]):
 			np.savetxt(f, test_r[i].astype(int),delimiter=',',fmt='%s')
 			
 f.close()
 with open('Misclassifications.csv','a') as g:
 	for i in range(10000):
-		if(classes[i]!=labels_2[i]):
+		#if(classes[i]!=labels_2[i]):
 			a = np.asarray([classes[i],labels_2[i]])
 			np.savetxt(g, a.astype(int),delimiter=',',fmt='%s')
 			
