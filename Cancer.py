@@ -24,18 +24,30 @@ from array import array as pyarray
 from numpy import append, array, int8, uint8, zeros,genfromtxt
 from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
+from random import randint
 
-
-data = genfromtxt("N" + str(i+1) + ".csv",delimiter=',')
+data = genfromtxt("N" + str(1) + ".csv",delimiter=',')
 s = np.shape(data)[0]
-all_data=[]
-for i in range(696):
-	data = genfromtxt("N" + str(i+1) + ".csv",delimiter=',')
+a = data[0:s,0:s]
+b = data[0:s,s:(2*s)]
+c = data[0:s,(2*s):(3*s)]
+d = np.dstack((a,b,c))
+data = genfromtxt("N" + str(2) + ".csv",delimiter=',')
+a = data[0:s,0:s]
+b = data[0:s,s:(2*s)]
+c = data[0:s,(2*s):(3*s)]
+d1 = np.dstack((a,b,c))
+all_data=[d,d1]
+labels=[0,1]
+for i in range(694):
+	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
 	c = data[0:s,(2*s):(3*s)]
 	d = np.dstack((a,b,c))
-	all_data = all_data.append(d)
+	all_data.append(d)
+	labels.append(randint(0,1))
+	print(i)
 	
 train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.2)
 train = train.reshape(np.shape(train)[0],3,s,s)
