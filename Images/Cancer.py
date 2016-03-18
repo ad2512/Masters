@@ -60,10 +60,10 @@ labels_1a = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
 
 # Building Model
-model = Sequential()
-model.add(Convolution2D(10,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+ model = Sequential()
+model.add(Convolution2D(5,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.3))
 #model.add(Convolution2D(32, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
@@ -79,6 +79,7 @@ model.add(Flatten())
 #model.add(Dropout(0.5))
 model.add(Dense(6))
 model.add(Activation('softmax'))
+
 
 #sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
