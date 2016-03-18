@@ -82,7 +82,9 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 model.fit(train, labels_1, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
-
+classes = model.predict_classes(test, batch_size=300)
+for i in range(np.size(classes)):
+	print(classes(i))
 
 
 model = Sequential()
@@ -107,3 +109,6 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
 model.fit(train, labels_1, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+classes = model.predict_classes(test, batch_size=300)
+for i in range(np.size(classes)):
+	print(classes(i))
