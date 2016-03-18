@@ -40,7 +40,7 @@ c = data[0:s,(2*s):(3*s)]
 d1 = np.dstack((a,b,c))
 all_data=[d,d1]
 labels=genfromtxt("Labels.csv",delimiter=',')
-for i in range(549):
+for i in range(np.size(labels,1)):
 	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
