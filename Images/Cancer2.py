@@ -50,7 +50,7 @@ for i in range(np.size(labels)-2):
 	all_data.append(d)
 	
 	
-train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.2)
+train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.4)
 train = train.reshape(np.shape(train)[0],3,s,s)
 train = train.astype('float32')
 test_r=test
