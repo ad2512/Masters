@@ -41,7 +41,8 @@ d1 = np.dstack((a,b,c))
 all_data=[d,d1]
 labels=genfromtxt("Labels.csv",delimiter=',')
 for i in range(np.size(labels)-2):
-	print(i+3)
+	if(isinstance(i/10, int )==1):
+		print(i+3)
 	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
@@ -75,7 +76,7 @@ model.add(Dropout(0.3))
 #model.add(Dropout(0.5))
 model.add(Flatten())
 model.add(Dense(50))
-#modelodel.add(Activation('relu'))
+model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(6))
 model.add(Activation('softmax'))
@@ -104,7 +105,7 @@ model.add(Dropout(0.3))
 #model.add(Dropout(0.5))
 model.add(Flatten())
 model.add(Dense(50))
-modelodel.add(Activation('relu'))
+model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(6))
 model.add(Activation('softmax'))
