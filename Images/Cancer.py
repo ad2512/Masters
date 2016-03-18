@@ -83,22 +83,22 @@ model.add(Activation('softmax'))
 
 
 #sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1a, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.compile(loss='mse', optimizer="sgd")
+model.fit(train, labels_1, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 classes = model.predict_classes(test, batch_size=20)
 classes
 
 
 # Building Model
 model = Sequential()
-model.add(Convolution2D(16,5,5,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Convolution2D(16,5,5,input_shape=(3,s,s)))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(5, 5)))
+model.add(MaxPooling2D(pool_size=(3, 3)))
 model.add(Dropout(0.3))
-model.add(Convolution2D(32, 5, 5, border_mode='full'))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(5, 5)))
-model.add(Dropout(0.3))
+#model.add(Convolution2D(32, 5, 5, border_mode='full'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=(5, 5)))
+#model.add(Dropout(0.3))
 #model.add(Convolution2D(64, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -111,8 +111,8 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 #sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1a, batch_size=20, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.compile(loss='categorical_crossentropy', optimizer="adagrad")
+model.fit(train, labels_1a, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes = model.predict_classes(test, batch_size=20)
 classes
 
@@ -120,28 +120,27 @@ classes
 
 # Building Model
 model = Sequential()
-model.add(Convolution2D(10,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Convolution2D(16,5,5,input_shape=(3,s,s)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(3, 3)))
 model.add(Dropout(0.3))
 #model.add(Convolution2D(32, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
+#model.add(MaxPooling2D(pool_size=(5, 5)))
+#model.add(Dropout(0.3))
 #model.add(Convolution2D(64, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(0.5))
 model.add(Flatten())
-model.add(Dense(50))
-model.add(Activation('tanh'))
+model.add(Dense(100))
+model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
-
 #sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
+model.compile(loss='categorical_crossentropy', optimizer="adadelta")
 model.fit(train, labels_1a, batch_size=20, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 classes = model.predict_classes(test, batch_size=20)
 classes
