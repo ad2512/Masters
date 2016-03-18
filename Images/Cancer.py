@@ -60,7 +60,7 @@ labels_1a = np_utils.to_categorical(labels_1)
 labels_2a = np_utils.to_categorical(labels_2)
 
 # Building Model
- model = Sequential()
+model = Sequential()
 model.add(Convolution2D(5,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
