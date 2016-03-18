@@ -40,7 +40,7 @@ c = data[0:s,(2*s):(3*s)]
 d1 = np.dstack((a,b,c))
 all_data=[d,d1]
 labels=genfromtxt("Labels.csv",delimiter=',')
-for i in range(np.size(labels,1)-2):
+for i in range(np.size(labels,1)-5):
 	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
@@ -50,7 +50,7 @@ for i in range(np.size(labels,1)-2):
 	print(i+1)
 	
 	
-train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.5)
+train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.4)
 train = train.reshape(np.shape(train)[0],3,s,s)
 train = train.astype('float32')
 test_r=test
