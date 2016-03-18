@@ -28,28 +28,7 @@ from random import randint
 
 # Setting up the Data
 data = genfromtxt("N" + str(1) + ".csv",delimiter=',')
-s = np.shape(data)[0]
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d = np.dstack((a,b,c))
-data = genfromtxt("N" + str(2) + ".csv",delimiter=',')
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d1 = np.dstack((a,b,c))
-all_data=[d,d1]
-labels=genfromtxt("Labels.csv",delimiter=',')
-for i in range(np.size(labels)-3):
-	print(i+3)
-	if((i+3)>(np.size(labels))):
-		break
-	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
-	a = data[0:s,0:s]
-	b = data[0:s,s:(2*s)]
-	c = data[0:s,(2*s):(3*s)]
-	d = np.dstack((a,b,c))
-	all_data.append(d)
+
 	
 	
 train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.4)
