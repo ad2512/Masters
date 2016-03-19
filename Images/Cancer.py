@@ -85,12 +85,8 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
 model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
-classes = model.predict_classes(test, batch_size=20)
-classes2 = model.predict_classes(train,batch_size=20)
-for i in range(10):
-	print(classes(i),classes2(i))
 
 
 # Building Model
@@ -119,13 +115,8 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
+model.compile(loss='categorical_crossentropy', optimizer="adagrad"")
 model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
-classes = model.predict_classes(test, batch_size=20)
-classes2 = model.predict_classes(train,batch_size=20)
-for i in range(10):
-	print(classes(i),classes2(i))
-
 
 
 # Building Model
@@ -154,9 +145,5 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="adagrad")
+model.compile(loss='categorical_crossentropy', optimizer="adadelta")
 model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
-classes = model.predict_classes(test, batch_size=20)
-classes2 = model.predict_classes(train,batch_size=20)
-for i in range(10):
-	print(classes(i),classes2(i))
