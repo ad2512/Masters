@@ -84,45 +84,16 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 
-sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
-model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
-
-# Building Model
-model = Sequential()
-model.add(Convolution2D(20,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.3))
-#model.add(Convolution2D(32, 5, 5, border_mode='full'))
-#model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
-#model.add(Convolution2D(64, 5, 5, border_mode='full'))
-#model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(100))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(50))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(6))
-model.add(Activation('softmax'))
-
-
-sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="adagrad")
-model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 
 
 # Building Model
 model = Sequential()
 model.add(Convolution2D(20,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('sigmoid'))
+model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.3))
 #model.add(Convolution2D(32, 5, 5, border_mode='full'))
@@ -144,6 +115,68 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 
-sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="adadelta")
-model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
+model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(20,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.3))
+#model.add(Convolution2D(32, 5, 5, border_mode='full'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.25))
+#model.add(Convolution2D(64, 5, 5, border_mode='full'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.5))
+model.add(Flatten())
+model.add(Dense(100))
+model.add(Activation('tanh'))
+model.add(Dropout(0.5))
+model.add(Dense(50))
+model.add(Activation('tanh'))
+model.add(Dropout(0.5))
+model.add(Dense(6))
+model.add(Activation('softmax'))
+
+
+sgd = SGD(lr=1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(20,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.3))
+#model.add(Convolution2D(32, 5, 5, border_mode='full'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.25))
+#model.add(Convolution2D(64, 5, 5, border_mode='full'))
+#model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(0.5))
+model.add(Flatten())
+model.add(Dense(100))
+model.add(Activation('tanh'))
+model.add(Dropout(0.5))
+model.add(Dense(50))
+model.add(Activation('tanh'))
+model.add(Dropout(0.5))
+model.add(Dense(6))
+model.add(Activation('softmax'))
+
+
+sgd = SGD(lr=1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
+model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+
+
