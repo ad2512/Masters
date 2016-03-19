@@ -85,8 +85,8 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 
 
 
@@ -116,7 +116,7 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='mse', optimizer="RMSprop")
+model.compile(loss='mse', optimizer=sgd)
 model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
@@ -146,8 +146,8 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=1, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.fit(train, labels_1a, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
 
 
 # Building Model
@@ -176,7 +176,7 @@ model.add(Activation('softmax'))
 
 
 sgd = SGD(lr=1, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='mse', optimizer="RMSprop")
+model.compile(loss='mse', optimizer=sgd)
 model.fit(train, labels_1, batch_size=30, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2))
 
 
