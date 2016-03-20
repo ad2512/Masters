@@ -21,41 +21,39 @@ import pylab as pl
 import matplotlib.cm as cm
 import os, struct
 from array import array as pyarray
-from numpy import append, array, int8, uint8, zeros,genfromtxt
+from numpy import append, array, int8, uint8, zeros,genfromtxt, matrix
 from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
 from random import randint
 
 # Setting up the Data
+A=539;
 data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(1) + ".csv",delimiter=',')
-lab = genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=',')
+l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
 s = np.shape(data)[0]
 a = data[0:s,0:s]
 b = data[0:s,s:(2*s)]
 c = data[0:s,(2*s):(3*s)]
 d = np.dstack((a,b,c))
-l = lab[0]
 data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(2) + ".csv",delimiter=',')
-lab = genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=',')
+l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
 a = data[0:s,0:s]
 b = data[0:s,s:(2*s)]
 c = data[0:s,(2*s):(3*s)]
 d1 = np.dstack((a,b,c))
-l1 = lab[1]
 all_data=[d,d1]
 labels=[l,l1]
-for i in range(np.size(labels)-3):
+for i in range(A-2):
 	print(i+3)
-	if((i+3)>(np.size(labels))):
+	if((i+3)>A):
 		break
-	data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(i+3) + ".csv",delimiter=',')
-	lab = genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=',')
+	#data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(i+3) + ".csv",delimiter=',')
+	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
 	c = data[0:s,(2*s):(3*s)]
 	d = np.dstack((a,b,c))
-	l = lab[i+2]
-	all_data.append(d)
+	#all_data.append(d)
 	labels.append(l)
 	
 	
@@ -73,7 +71,7 @@ model = Sequential()
 model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
+model.add(Dropout(0.2))
 #model.add(Convolution2D(32, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -85,8 +83,8 @@ model.add(Dropout(0.5))
 model.add(Flatten())
 model.add(Dense(1000))
 model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(7))
+model.add(Dropout(0.2))
+model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
