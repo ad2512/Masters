@@ -47,13 +47,13 @@ for i in range(A-2):
 	print(i+3)
 	if((i+3)>A):
 		break
-	#data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(i+3) + ".csv",delimiter=',')
+	data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(i+3) + ".csv",delimiter=',')
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
 	a = data[0:s,0:s]
 	b = data[0:s,s:(2*s)]
 	c = data[0:s,(2*s):(3*s)]
 	d = np.dstack((a,b,c))
-	#all_data.append(d)
+	all_data.append(d)
 	labels.append(l)
 	
 	
