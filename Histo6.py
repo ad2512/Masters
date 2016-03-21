@@ -61,15 +61,15 @@ print ("s = %s",s)
 
 # Building Model
 model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
+model.add(Convolution2D(16, 3, 3))
 model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(3, 2)))
 model.add(Dropout(0.25))
-model.add(Convolution2D(64, 3, 3, border_mode='full'))
+model.add(Convolution2D(32, 3, 3, border_mode='full'))
 model.add(Activation('tanh'))
-model.add(Convolution2D(64, 3, 3))
+model.add(Convolution2D(32, 3, 3))
 model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(3, 2)))
 model.add(Dropout(0.25))
@@ -81,7 +81,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="adam")
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 # Building Model
