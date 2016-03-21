@@ -57,7 +57,7 @@ for i in range(A-2):
 	labels.append(l)
 	
 	
-all_data = all_data.reshape(np.shape(all_data)[0],3,s,s)
+all_data = all_data.reshape(A,3,s,s)
 all_data = all_data.astype('float32')
 labels = np_utils.to_categorical(labels)
 
