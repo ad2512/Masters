@@ -25,39 +25,27 @@ from numpy import append, array, int8, uint8, zeros,genfromtxt, matrix
 from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
 from random import randint
+import cv2
 
 # Setting up the Data
 A=539;
-data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(1) + ".csv",delimiter=',')
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
-s = np.shape(data)[0]
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d = np.dstack((a,b,c))
-data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(2) + ".csv",delimiter=',')
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d1 = np.dstack((a,b,c))
+d = cv2.imread('/home/silo1/ad2512/Histo_6/I1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/I2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
-	print(i+3)
 	if((i+3)>A):
 		break
-	data = genfromtxt("/home/silo1/ad2512/Histo_6/N" + str(i+3) + ".csv",delimiter=',')
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	a = data[0:s,0:s]
-	b = data[0:s,s:(2*s)]
-	c = data[0:s,(2*s):(3*s)]
-	d = np.dstack((a,b,c))
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/I" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
-	
+
+s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
-all_data = all_data.astype('float32')
+#all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
