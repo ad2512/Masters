@@ -59,7 +59,7 @@ for i in range(A-2):
 all_data = np.asarray(all_data)	
 all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
-labels = np.asarray(all_data)
+labels = np.asarray(labels)
 labels = labels.astype('int')
 labels = np_utils.to_categorical(labels)
 
