@@ -21,73 +21,124 @@ import pylab as pl
 import matplotlib.cm as cm
 import os, struct
 from array import array as pyarray
-from numpy import append, array, int8, uint8, zeros,genfromtxt
+from numpy import append, array, int8, uint8, zeros,genfromtxt, matrix
 from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
 from random import randint
+import cv2
 
 # Setting up the Data
-data = genfromtxt("N" + str(1) + ".csv",delimiter=',')
-lab = genfromtxt("L" + str(1) + ".csv",delimiter=',')
-s = np.shape(data)[0]
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d = np.dstack((a,b,c))
-l = lab[0]
-data = genfromtxt("N" + str(2) + ".csv",delimiter=',')
-lab = genfromtxt("L" + str(2) + ".csv",delimiter=',')
-a = data[0:s,0:s]
-b = data[0:s,s:(2*s)]
-c = data[0:s,(2*s):(3*s)]
-d1 = np.dstack((a,b,c))
-l1 = lab[1]
+A=662;
+l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
+l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
+d = cv2.imread('/home/silo1/ad2512/Histo_6/SI1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/SI2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
-for i in range(np.size(labels)-3):
-	print(i+3)
-	if((i+3)>(np.size(labels))):
+for i in range(A-2):
+	if((i+3)>A):
 		break
-	data = genfromtxt("N" + str(i+3) + ".csv",delimiter=',')
-	lab = genfromtxt("L" + str(i+3) + ".csv",delimiter=',')
-	a = data[0:s,0:s]
-	b = data[0:s,s:(2*s)]
-	c = data[0:s,(2*s):(3*s)]
-	d = np.dstack((a,b,c))
-	l = lab[i+2]
+	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/SI" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
-	
-	
-train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.4)
-train = train.reshape(np.shape(train)[0],3,s,s)
-train = train.astype('float32')
-test_r=test
-test = test.reshape(np.shape(test)[0],3,s,s)
-test = test.astype('float32')
-labels_1 = np_utils.to_categorical(labels_1)
-labels_2a = np_utils.to_categorical(labels_2)
+
+s = np.shape(all_data)[1]
+all_data = np.asarray(all_data)	
+all_data = all_data.astype('float32')
+all_data = all_data.reshape(A,3,s,s)
+labels = np.asarray(labels)
+labels = labels.astype('int')
+labels = np_utils.to_categorical(labels)
+print ("0 = %s",np.shape(all_data)[0])
+print ("0 = %s",np.shape(all_data)[1])
+print ("0 = %s",np.shape(all_data)[2])
+print ("0 = %s",np.shape(all_data)[3])
+
+
+print ("s = %s",s)
+
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(Convolution2D(16, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(32, 3, 3, border_mode='full'))
+model.add(Activation('tanh'))
+model.add(Convolution2D(32, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(2))
+model.add(Activation('softmax'))
+
+model.compile(loss='categorical_crossentropy', optimizer="adam")
+model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
 
 # Building Model
 model = Sequential()
 model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
-#model.add(Convolution2D(32, 5, 5, border_mode='full'))
-#model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.25))
-#model.add(Convolution2D(64, 5, 5, border_mode='full'))
-#model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
-#model.add(Dropout(0.5))
+model.add(Activation('tanh'))
+model.add(Convolution2D(32, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(64, 3, 3, border_mode='full'))
+model.add(Activation('tanh'))
+model.add(Convolution2D(64, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(1000))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(7))
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(6))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=50, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.compile(loss='categorical_crossentropy', optimizer="adagrad")
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
+
+
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(Convolution2D(32, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(64, 3, 3, border_mode='full'))
+model.add(Activation('tanh'))
+model.add(Convolution2D(64, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(6))
+model.add(Activation('softmax'))
+
+sgd = SGD(lr=0.001, decay=1e-3, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
