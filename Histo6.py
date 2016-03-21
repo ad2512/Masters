@@ -57,14 +57,9 @@ for i in range(A-2):
 	labels.append(l)
 	
 	
-train, test, labels_1, labels_2 = train_test_split(all_data,labels,test_size=0.4)
-train = train.reshape(np.shape(train)[0],3,s,s)
-train = train.astype('float32')
-test_r=test
-test = test.reshape(np.shape(test)[0],3,s,s)
-test = test.astype('float32')
-labels_1 = np_utils.to_categorical(labels_1)
-labels_2a = np_utils.to_categorical(labels_2)
+all_data = all_data.reshape(np.shape(all_data)[0],3,s,s)
+all_data = all_data.astype('float32')
+labels = np_utils.to_categorical(labels)
 
 # Building Model
 model = Sequential()
@@ -88,7 +83,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
@@ -114,7 +109,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 # Building Model
@@ -139,7 +134,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
@@ -165,7 +160,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
@@ -191,4 +186,4 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(train, labels_1, batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(test, labels_2a))
+model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
