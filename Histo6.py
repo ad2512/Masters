@@ -45,12 +45,12 @@ for i in range(A-2):
 
 s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
-all_data = all_data.astype('float32')
+#all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
 labels = np_utils.to_categorical(labels)
-print "%d, %d, %d, %d, %d" % (np.shape(all_data)[0], np.shape(all_data)[1], np.shape(all_data)[2], np.shape(all_data)[3], s)
+print "%s"" % (np.shape(all_data)[0])
 # Building Model
 model = Sequential()
 model.add(Convolution2D(8,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
