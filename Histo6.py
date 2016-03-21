@@ -50,7 +50,7 @@ all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
 labels = np_utils.to_categorical(labels)
-
+print np.shape(all_data)[0], np.shape(all_data)[1], np.shape(all_data)[2], np.shape(all_data)[3], s
 # Building Model
 model = Sequential()
 model.add(Convolution2D(8,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
