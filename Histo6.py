@@ -73,7 +73,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(all_data[0:5], labels[0:5], batch_size=5, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:100], labels[0:100], batch_size=5, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
