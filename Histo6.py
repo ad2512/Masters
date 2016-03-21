@@ -60,7 +60,7 @@ print ("s = %s",s)
 # Building Model
 # Building Model
 model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,32,32)))
+model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('tanh'))
 model.add(Convolution2D(32, 3, 3))
 model.add(Activation('tanh'))
@@ -82,7 +82,7 @@ model.add(Flatten())
 model.add(Dense(200))
 model.add(Activation('tanh'))
 model.add(Dropout(0.25))
-model.add(Dense(10))
+model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
