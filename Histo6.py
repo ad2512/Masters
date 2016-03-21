@@ -16,7 +16,7 @@ from theano.tensor.nnet import softmax
 from theano.tensor import shared_randomstreams
 from theano.tensor.signal import downsample
 from theano.tensor.nnet import sigmoid
-from theano.tensor import relu
+from theano.tensor import tanh
 import pylab as pl
 import matplotlib.cm as cm
 import os, struct
