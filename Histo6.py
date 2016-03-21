@@ -31,15 +31,15 @@ import cv2
 A=539;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/I1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/I2.jpg')
+d = cv2.imread('/home/silo1/ad2512/Histo_6/SI1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/SI2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/I" + str(i+3) + ".jpg")
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/SI" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
 
@@ -57,9 +57,9 @@ print ("0 = %s",np.shape(all_data)[3])
 print ("s = %s",s)
 # Building Model
 model = Sequential()
-model.add(Convolution2D(8,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(0.2))
 #model.add(Convolution2D(32, 5, 5, border_mode='full'))
 #model.add(Activation('relu'))
@@ -70,7 +70,7 @@ model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(0.5))
 model.add(Flatten())
-model.add(Dense(25))
+model.add(Dense(50))
 model.add(Activation('relu'))
 #model.add(Dropout(0.2))
 model.add(Dense(6))
