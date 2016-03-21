@@ -28,7 +28,7 @@ from random import randint
 import cv2
 
 # Setting up the Data
-A=509;
+A=539;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
 d = cv2.imread('/home/silo1/ad2512/Histo_6/I1.jpg')
