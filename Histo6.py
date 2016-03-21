@@ -85,7 +85,7 @@ model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.0001, rho=0.9, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
-model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 # Building Model
@@ -114,7 +114,7 @@ model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.00001, rho=0.9, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
-model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 # Building Model
@@ -143,5 +143,5 @@ model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.000001, rho=0.9, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
-model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
