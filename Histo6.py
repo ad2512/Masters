@@ -9,7 +9,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.datasets import mnist
-from keras.optimizers import SGD, RMSprop
+from keras.optimizers import sgd, RMSprop
 from keras.utils import np_utils, generic_utils
 from theano.tensor.nnet import conv
 from theano.tensor.nnet import softmax
@@ -84,7 +84,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.0001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.compile(loss='categorical_crossentropy', optimizer=RMS)
 model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
@@ -113,7 +113,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.00001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.compile(loss='categorical_crossentropy', optimizer=RMS)
 model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
@@ -142,6 +142,6 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 RMS = RMSprop(lr=0.000001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.compile(loss='categorical_crossentropy', optimizer=RMS)
 model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
