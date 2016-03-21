@@ -76,7 +76,7 @@ model.add(Dropout(0.2))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
+theano.shared(model.compile(loss='categorical_crossentropy', optimizer="RMSprop"),borrow="TRUE")
 model.fit(all_data[0:10], labels[0:10], batch_size=5, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
