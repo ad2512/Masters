@@ -81,7 +81,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="adam")
-model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 # Building Model
