@@ -28,7 +28,7 @@ from random import randint
 import cv2
 
 # Setting up the Data
-A=539;
+A=509;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
 d = cv2.imread('/home/silo1/ad2512/Histo_6/I1.jpg')
@@ -70,14 +70,14 @@ model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(0.5))
 model.add(Flatten())
-model.add(Dense(100))
-model.add(Activation('relu'))
-model.add(Dropout(0.2))
+#model.add(Dense(100))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.2))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
 theano.shared(model.compile(loss='categorical_crossentropy', optimizer="RMSprop"),borrow=True)
-model.fit(all_data[0:10], labels[0:10], batch_size=5, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:10], labels[0:10], batch_size=1, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
