@@ -45,7 +45,7 @@ for i in range(A-2):
 
 s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
-#all_data = all_data.astype('float32')
+all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
@@ -73,7 +73,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:5], labels[0:5], batch_size=5, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
