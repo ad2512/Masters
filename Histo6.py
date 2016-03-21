@@ -57,7 +57,7 @@ print ("0 = %s",np.shape(all_data)[3])
 print ("s = %s",s)
 # Building Model
 model = Sequential()
-model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Convolution2D(8,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('relu'))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(0.2))
@@ -77,7 +77,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(all_data[0:400], labels[0:400], batch_size=2, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:400], labels[0:400], batch_size=1, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
 
