@@ -59,6 +59,7 @@ print ("0 = %s",np.shape(all_data)[3])
 print ("s = %s",s)
 
 
+
 # Building Model
 model = Sequential()
 model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
@@ -83,8 +84,8 @@ model.add(Dropout(0.25))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
-RMS = RMSprop(lr=0.0001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=RMS)
+sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
 model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
@@ -112,8 +113,8 @@ model.add(Dropout(0.25))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
-RMS = RMSprop(lr=0.00001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=RMS)
+sgd = SGD(lr=0.0001, decay=1e-2, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
 model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
 
@@ -141,7 +142,64 @@ model.add(Dropout(0.25))
 model.add(Dense(6))
 model.add(Activation('softmax'))
 
-RMS = RMSprop(lr=0.000001, rho=0.9, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=RMS)
+sgd = SGD(lr=0.0001, decay=1e-1, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
 model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(Convolution2D(32, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(64, 3, 3, border_mode='full'))
+model.add(Activation('tanh'))
+model.add(Convolution2D(64, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(6))
+model.add(Activation('softmax'))
+
+sgd = SGD(lr=0.0001, decay=1e-4, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
+
+# Building Model
+model = Sequential()
+model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('tanh'))
+model.add(Convolution2D(32, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Convolution2D(64, 3, 3, border_mode='full'))
+model.add(Activation('tanh'))
+model.add(Convolution2D(64, 3, 3))
+model.add(Activation('tanh'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(500))
+model.add(Activation('tanh'))
+model.add(Dropout(0.25))
+model.add(Dense(6))
+model.add(Activation('softmax'))
+
+sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer='adam')
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
