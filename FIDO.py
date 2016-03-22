@@ -29,17 +29,17 @@ import cv2
 
 # Setting up the Data
 A=662;
-l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
-l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/SI1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/SI2.jpg')
+l = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(1) + ".csv",delimiter=','))
+l1 = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(2) + ".csv",delimiter=','))
+d = cv2.imread('/home/silo1/ad2512/FIDO/SI1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/FIDO/SI2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
-	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/SI" + str(i+3) + ".jpg")
+	l = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(i+3) + ".csv",delimiter=','))
+	d = cv2.imread("/home/silo1/ad2512/FIDO/SI" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
 
@@ -135,10 +135,10 @@ model.add(Dropout(0.25))
 model.add(Dense(500))
 model.add(Activation('tanh'))
 model.add(Dropout(0.25))
-model.add(Dense(6))
+model.add(Dense(2))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.001, decay=1e-3, momentum=0.9, nesterov=True)
+sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
 model.compile(loss='mse', optimizer=sgd)
 model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
