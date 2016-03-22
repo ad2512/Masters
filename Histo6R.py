@@ -50,7 +50,7 @@ d = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced1.jpg')
 d1 = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced2.jpg')
 train=[d,d1]
 train_labels=[l,l1]
-for i in range(A-2):
+for i in range(B-2):
 	if((i+3)>A):
 		break
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(i+3) + ".csv",delimiter=','))
