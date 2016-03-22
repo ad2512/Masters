@@ -80,12 +80,12 @@ model.add(Dropout(0.25))
 model.add(Dense(500))
 model.add(Activation('tanh'))
 model.add(Dropout(0.25))
-model.add(Dense(6))
+model.add(Dense(2))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
 model.compile(loss='mse', optimizer=sgd)
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[500:662], labels[500:662]))
 
 
 # Building Model
@@ -109,11 +109,11 @@ model.add(Dropout(0.25))
 model.add(Dense(500))
 model.add(Activation('tanh'))
 model.add(Dropout(0.25))
-model.add(Dense(6))
+model.add(Dense(2))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer="adagrad")
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[500:662], labels[500:662]))
 
 
 
@@ -144,5 +144,5 @@ model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
 model.compile(loss='mse', optimizer=sgd)
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[500:662], labels[500:662]))
 
