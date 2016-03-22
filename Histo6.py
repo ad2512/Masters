@@ -85,5 +85,5 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
+model.compile(loss='mse', optimizer="SGD")
 model.fit(all_data[150:210], labels[150:210], batch_size=3, nb_epoch=20,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
