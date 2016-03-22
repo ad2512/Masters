@@ -86,11 +86,31 @@ model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
 model.compile(loss='mse', optimizer=sgd)
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=5,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
-classes = model.predict_classes(test, batch_size=300)
+classes = model.predict_classes(all_data[400:539], batch_size=300)
 for i in range(139):
 	print(classes[i])
+	
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
+classes = model.predict_classes(all_data[400:539], batch_size=300)
+for i in range(139):
+	print(classes[i])
+	
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
+classes = model.predict_classes(all_data[400:539], batch_size=300)
+for i in range(139):
+	print(classes[i])
+	
+model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=1,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+
+classes = model.predict_classes(all_data[400:539], batch_size=300)
+for i in range(139):
+	print(classes[i])
+	
+
 	
 # Building Model
 model = Sequential()
