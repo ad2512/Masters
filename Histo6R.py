@@ -29,20 +29,35 @@ import cv2
 
 # Setting up the Data
 A=539;
+B=144;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/NORM1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/NORM2.jpg')
+d = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/NORM" + str(i+3) + ".jpg")
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/255NORM" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
 
+l = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(1) + ".csv",delimiter=','))
+l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(2) + ".csv",delimiter=','))
+d = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced2.jpg')
+train=[d,d1]
+train_labels=[l,l1]
+for i in range(A-2):
+	if((i+3)>A):
+		break
+	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(i+3) + ".csv",delimiter=','))
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/Reduced" + str(i+3) + ".jpg")
+	train.append(d)
+	train_labels.append(l)
+	
 s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
 all_data = all_data.astype('float32')
@@ -50,14 +65,12 @@ all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
 labels = np_utils.to_categorical(labels)
-print ("0 = %s",np.shape(all_data)[0])
-print ("0 = %s",np.shape(all_data)[1])
-print ("0 = %s",np.shape(all_data)[2])
-print ("0 = %s",np.shape(all_data)[3])
-
-
-print ("s = %s",s)
-
+train = np.asarray(train)	
+train = train.astype('float32')
+train = train.reshape(A,3,s,s)
+train_labels = np.asarray(train_labels)
+train_labels = train_labels.astype('int')
+train_labels = np_utils.to_categorical(train_labels)
 
 # Building Model
 # Building Model
@@ -93,4 +106,4 @@ model.add(Activation('softmax'))
 #sgd = SGD(lr=0.0000001, decay=1e-6, momentum=0.9, nesterov=True)
 RMS = RMSprop(lr=0.000000001, rho=0.7, epsilon=1e-08)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
-model.fit(all_data, labels, batch_size=10, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(all_data[300:539], labels[300:539]))
+model.fit(train, train_labels, batch_size=10, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(all_data, labels))
