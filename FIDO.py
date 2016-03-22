@@ -28,18 +28,18 @@ from random import randint
 import cv2
 
 # Setting up the Data
-A=662;
+A=539;
 l = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/FIDO/SI1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/FIDO/SI2.jpg')
+d = cv2.imread('/home/silo1/ad2512/FIDO/255NORM1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/FIDO/255NORM2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
 	l = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/FIDO/SI" + str(i+3) + ".jpg")
+	d = cv2.imread("/home/silo1/ad2512/FIDO/255NORM" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
 
@@ -60,60 +60,37 @@ print ("s = %s",s)
 
 
 # Building Model
-model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
-model.add(Dropout(0.25))
-model.add(Convolution2D(64, 3, 3, border_mode='full'))
-model.add(Activation('tanh'))
-model.add(Convolution2D(64, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 3)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.25))
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.25))
-model.add(Dense(2))
-model.add(Activation('softmax'))
-
-model.compile(loss='categorical_crossentropy', optimizer="RMSprop")
-model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[500:662], labels[500:662]))
-
-
-
-
 # Building Model
 model = Sequential()
+model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Activation('relu'))
+#model.add(Convolution2D(16, 3, 3))
+#model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(3, 2)))
+model.add(Dropout(0.25))
 model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
-model.add(Activation('tanh'))
+model.add(Activation('relu'))
+#model.add(Convolution2D(32, 3, 3))
+#model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(3, 2)))
 model.add(Dropout(0.25))
 model.add(Convolution2D(64, 3, 3, border_mode='full'))
-model.add(Activation('tanh'))
-model.add(Convolution2D(64, 3, 3))
-model.add(Activation('tanh'))
+#model.add(Activation('relu'))
+#model.add(Convolution2D(64, 3, 3))
+model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(3, 2)))
 model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.25))
-model.add(Dense(500))
-model.add(Activation('tanh'))
+model.add(Dense(1000))
+model.add(Activation('relu'))
+#model.add(Dropout(0.25))
+#model.add(Dense(500))
+#model.add(Activation('relu'))
 model.add(Dropout(0.25))
 model.add(Dense(2))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.0001, decay=1e-3, momentum=0.9, nesterov=True)
-model.compile(loss='mse', optimizer=sgd)
-model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[500:662], labels[500:662]))
-
+#sgd = SGD(lr=0.0000001, decay=1e-6, momentum=0.9, nesterov=True)
+RMS = RMSprop(lr=0.000000001, rho=0.7, epsilon=1e-08)
+model.compile(loss='categorical_crossentropy', optimizer=RMS)
+model.fit(all_data, labels, batch_size=10, nb_epoch=50,verbose=1,show_accuracy=True,validation_data=(all_data[300:539], labels[300:539]))
