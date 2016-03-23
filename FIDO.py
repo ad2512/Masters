@@ -91,6 +91,6 @@ model.add(Dense(2))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
-RMS = RMSprop(lr=0.000000001, rho=0.7, epsilon=1e-08)
+RMS = RMSprop(lr=0.00000001, rho=0.7, epsilon=1e-08)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
-model.fit(all_data[0:450], labels[0:450], batch_size=10, nb_epoch=100,verbose=1,show_accuracy=True,validation_data=(all_data[450:662], labels[450:662]))
+model.fit(all_data[0:450], labels[0:450], batch_size=10, nb_epoch=1000,verbose=1,show_accuracy=True,validation_data=(all_data[450:662], labels[450:662]))
