@@ -31,15 +31,15 @@ import cv2
 A=488;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_2/L" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_2/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM2.jpg')
+d = cv2.imread('/home/silo1/ad2512/Histo_6/ZERONORM1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/ZERONORM2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
 	l = float(genfromtxt("/home/silo1/ad2512/Histo_2/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/255NORM" + str(i+3) + ".jpg")
+	d = cv2.imread("/home/silo1/ad2512/Histo_6/ZERONORM" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
 
