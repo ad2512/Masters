@@ -62,9 +62,9 @@ print ("s = %s",s)
 # Building Model
 # Building Model
 model = Sequential()
-model.add(Convolution2D(16,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
+model.add(Convolution2D(8,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
 model.add(Activation('tanh'))
-model.add(Convolution2D(16, 3, 3))
+model.add(Convolution2D(8, 3, 3))
 model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
