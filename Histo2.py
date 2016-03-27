@@ -38,7 +38,7 @@ labels=[l,l1]
 for i in range(A-2):
 	if((i+3)>A):
 		break
-	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
+	l = float(genfromtxt("/home/silo1/ad2512/Histo_2/L" + str(i+3) + ".csv",delimiter=','))
 	d = cv2.imread("/home/silo1/ad2512/Histo_6/255NORM" + str(i+3) + ".jpg")
 	all_data.append(d)
 	labels.append(l)
