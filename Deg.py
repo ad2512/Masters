@@ -87,7 +87,7 @@ model.add(Dropout(0.25))
 model.add(Dense(500))
 model.add(Activation('relu'))
 model.add(Dropout(0.25))
-model.add(Dense(2))
+model.add(Dense(3))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
