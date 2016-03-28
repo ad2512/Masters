@@ -9,7 +9,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.datasets import mnist
-from keras.optimizers import SGD, RMSprop
+from keras.optimizers import SGD, RMSprop, Adadelta
 from keras.utils import np_utils, generic_utils
 from theano.tensor.nnet import conv
 from theano.tensor.nnet import softmax
@@ -150,7 +150,7 @@ model.add(Dense(6))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.001, decay=1e-3, momentum=0.9, nesterov=True)
-Ada = Adadelta(lr=0.0000001, rho=0.95, epsilon=1e-06)
+Ada = Adadelta(lr=0.00001, rho=0.95, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(all_data[0:200], labels[0:200], batch_size=5, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
 
