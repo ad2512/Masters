@@ -12,7 +12,7 @@ x = np.linspace(a,b,num=g)
 
 # Define your 'y' function
 
-f = raw_input("Please enter your equation 'y': ")
+f = raw_input("Please enter your equation 'y' in Python format: ")
 y = eval(f)
 
 # Integration section
@@ -22,8 +22,8 @@ d = simps(y,x)
 y1 = simps(y*y,x)
 x_bar = x1/d
 y_bar = 0.5*y1/d
-print(x_bar)
-print(y_bar)
+print "X_bar = %s." % x_bar
+print "Y_bar = %s." % y_bar
 # Plotting curve
 
 plt.figure()
