@@ -22,10 +22,11 @@ d = simps(y,x)
 y1 = simps(y*y,x)
 x_bar = x1/d
 y_bar = 0.5*y1/d
-
+print(x_bar)
+print(y_bar)
 # Plotting curve
 
-plt.figure() #make new figure
+plt.figure()
 plt.plot(x,y)
 plt.xlabel('x')
 plt.ylabel('y')
