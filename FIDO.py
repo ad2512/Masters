@@ -84,16 +84,12 @@ train_data = np.asarray(train_data)
 test_data = np.asarray(test_data)
 train_labels = [train_labels[i] for i in b]
 labels = np_utils.to_categorical(labels)
-train_labels = np_utils.to_categorical(train_labels)
-test_labels = np_utils.to_categorical(test_labels)
 c = Counter(train_labels)
 print(c)
 c = Counter(test_labels)
 print(c)
-
-
-print ("s = %s",s)
-
+train_labels = np_utils.to_categorical(train_labels)
+test_labels = np_utils.to_categorical(test_labels)
 
 # Building Model
 # Building Model
