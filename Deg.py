@@ -50,11 +50,41 @@ all_data = all_data.reshape(A,3,s,s)
 all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
+prop = 0.8;
+train_labels=[]
+train_data=[]
+test_labels=[]
+test_data=[]
+c = Counter(labels)
+def scrambled(orig):
+    dest = orig[:]
+    random.shuffle(dest)
+    return dest
+
+for i in range(np.size(np.unique(labels))):
+	a=[];
+	b=[];
+	for j in range(np.size(labels)):
+		if(np.size(a)<prop*c[i]):
+			if(labels[j]==i):
+				a.extend([j])
+		else:
+			if(labels[j]==i):
+				b.extend([j])
+	train_labels.extend(labels[a])	
+	train_data.extend(all_data[a])
+	test_labels.extend(labels[b])
+	test_data.extend(all_data[b])
+
+a = range(np.size(train_labels))
+b = scrambled(a)
+train_data = [train_data[i] for i in b]
+train_labels = [train_labels[i] for i in b]
 labels = np_utils.to_categorical(labels)
-print ("0 = %s",np.shape(all_data)[0])
-print ("0 = %s",np.shape(all_data)[1])
-print ("0 = %s",np.shape(all_data)[2])
-print ("0 = %s",np.shape(all_data)[3])
+print ("0 = %s",np.shape(train_data)[0])
+print ("0 = %s",np.shape(train_data)[1])
+print ("0 = %s",np.shape(train_data)[2])
+print ("0 = %s",np.shape(train_data)[3])
 
 
 print ("s = %s",s)

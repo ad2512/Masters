@@ -26,6 +26,8 @@ from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
 from random import randint
 import cv2
+from collections import Counter
+import random
 
 # Setting up the Data
 A=539;
@@ -49,11 +51,42 @@ all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
 labels = np.asarray(labels)
 labels = labels.astype('int')
+prop = 0.8;
+train_labels=[]
+train_data=[]
+test_labels=[]
+test_data=[]
+c = Counter(labels)
+def scrambled(orig):
+    dest = orig[:]
+    random.shuffle(dest)
+    return dest
+
+for i in range(np.size(np.unique(labels))):
+	a=[];
+	b=[];
+	for j in range(np.size(labels)):
+		if(np.size(a)<prop*c[i]):
+			if(labels[j]==i):
+				a.extend([j])
+		else:
+			if(labels[j]==i):
+				b.extend([j])
+	train_labels.extend(labels[a])	
+	train_data.extend(all_data[a])
+	test_labels.extend(labels[b])
+	test_data.extend(all_data[b])
+
+a = range(np.size(train_labels))
+b = scrambled(a)
+train_data = [train_data[i] for i in b]
+train_labels = [train_labels[i] for i in b]
 labels = np_utils.to_categorical(labels)
 print ("0 = %s",np.shape(all_data)[0])
 print ("0 = %s",np.shape(all_data)[1])
 print ("0 = %s",np.shape(all_data)[2])
 print ("0 = %s",np.shape(all_data)[3])
+
 
 
 print ("s = %s",s)
@@ -91,4 +124,4 @@ model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer="adam")
-model.fit(all_data[0:439], labels[0:439], batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(all_data[439:539], labels[439:539]))
+model.fit(train_data, train_labels, batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
