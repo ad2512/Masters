@@ -82,10 +82,10 @@ b = scrambled(a)
 train_data = [train_data[i] for i in b]
 train_labels = [train_labels[i] for i in b]
 labels = np_utils.to_categorical(labels)
-print ("0 = %s",np.shape(all_data)[0])
-print ("0 = %s",np.shape(all_data)[1])
-print ("0 = %s",np.shape(all_data)[2])
-print ("0 = %s",np.shape(all_data)[3])
+print ("0 = %s",np.shape(train_data)[0])
+print ("0 = %s",np.shape(train_data)[1])
+print ("0 = %s",np.shape(train_data)[2])
+print ("0 = %s",np.shape(train_data)[3])
 
 
 

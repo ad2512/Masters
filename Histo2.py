@@ -26,6 +26,8 @@ from matplotlib.pyplot import imshow
 from sklearn.cross_validation import train_test_split
 from random import randint
 import cv2
+from collections import Counter
+import random
 
 # Setting up the Data
 A=488;
