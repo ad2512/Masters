@@ -86,10 +86,10 @@ train_labels = [train_labels[i] for i in b]
 labels = np_utils.to_categorical(labels)
 train_labels = np_utils.to_categorical(train_labels)
 test_labels = np_utils.to_categorical(test_labels)
-print ("0 = %s",np.shape(train_data)[0])
-print ("0 = %s",np.shape(train_data)[1])
-print ("0 = %s",np.shape(train_data)[2])
-print ("0 = %s",np.shape(train_data)[3])
+c = Counter(train_labels)
+print(c)
+c = Counter(test_labels)
+print(c)
 
 
 print ("s = %s",s)
