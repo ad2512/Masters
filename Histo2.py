@@ -52,6 +52,7 @@ all_data = all_data.reshape(A,3,s,s)
 all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
+nb_classes = np.size(np.unique(labels))
 prop = 0.8;
 train_labels=[]
 train_data=[]
@@ -84,17 +85,13 @@ train_data = [train_data[i] for i in b]
 train_data = np.asarray(train_data)
 test_data = np.asarray(test_data)
 train_labels = [train_labels[i] for i in b]
+labels = np_utils.to_categorical(labels)
+c = Counter(train_labels)
+print(c)
+c = Counter(test_labels)
+print(c)
 train_labels = np_utils.to_categorical(train_labels)
 test_labels = np_utils.to_categorical(test_labels)
-labels = np_utils.to_categorical(labels)
-print ("0 = %s",np.shape(train_data)[0])
-print ("0 = %s",np.shape(train_data)[1])
-print ("0 = %s",np.shape(train_data)[2])
-print ("0 = %s",np.shape(train_data)[3])
-
-
-print ("s = %s",s)
-
 
 # Building Model
 # Building Model
@@ -118,78 +115,14 @@ model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.5))
 model.add(Flatten())
-model.add(Dense(500))
+model.add(Dense(1000))
 model.add(Activation('tanh'))
 model.add(Dropout(0.5))
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.5))
-model.add(Dense(2))
+model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
 RMS = RMSprop(lr=0.0000000005, rho=0.7, epsilon=1e-08)
 Ada = Adadelta(lr=0.01, rho=0.95, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(all_data[0:400], labels[0:400], batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(all_data[400:488], labels[400:488]))
-
-
-# Building Model
-model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 2)))
-model.add(Dropout(0.25))
-model.add(Convolution2D(64, 3, 3, border_mode='full'))
-model.add(Activation('tanh'))
-model.add(Convolution2D(64, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 2)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.25))
-model.add(Dense(500))
-model.add(Activation('tanh'))
-model.add(Dropout(0.25))
-model.add(Dense(6))
-model.add(Activation('softmax'))
-
-model.compile(loss='categorical_crossentropy', optimizer="adagrad")
-model.fit(all_data[0:200], labels[0:200], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
-
-
-
-
-# Building Model
-model = Sequential()
-model.add(Convolution2D(32,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
-model.add(Activation('tanh'))
-model.add(Convolution2D(32, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 2)))
-model.add(Dropout(0.5))
-model.add(Convolution2D(64, 3, 3, border_mode='full'))
-model.add(Activation('tanh'))
-model.add(Convolution2D(64, 3, 3))
-model.add(Activation('tanh'))
-model.add(MaxPooling2D(pool_size=(3, 2)))
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(700))
-model.add(Activation('tanh'))
-model.add(Dropout(0.5))
-model.add(Dense(700))
-model.add(Activation('tanh'))
-model.add(Dropout(0.5))
-model.add(Dense(6))
-model.add(Activation('softmax'))
-
-sgd = SGD(lr=0.001, decay=1e-3, momentum=0.9, nesterov=True)
-Ada = Adadelta(lr=0.01, rho=0.95, epsilon=1e-06)
-model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(train_data, train_labels, batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
-
+model.fit(train_data, train_labels, batch_size=8, nb_epoch=1000,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))

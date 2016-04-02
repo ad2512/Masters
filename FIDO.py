@@ -51,6 +51,7 @@ all_data = all_data.reshape(A,3,s,s)
 all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
+nb_classes = np.size(np.unique(labels))
 prop = 0.8;
 train_labels=[]
 train_data=[]
@@ -116,7 +117,7 @@ model.add(Flatten())
 model.add(Dense(1000))
 model.add(Activation('tanh'))
 model.add(Dropout(0.5))
-model.add(Dense(2))
+model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
