@@ -81,6 +81,7 @@ for i in range(np.size(np.unique(labels))):
 a = range(np.size(train_labels))
 b = scrambled(a)
 train_data = [train_data[i] for i in b]
+train_data = np.asarray(train_data)
 train_labels = [train_labels[i] for i in b]
 train_labels = np_utils.to_categorical(train_labels)
 test_labels = np_utils.to_categorical(test_labels)
