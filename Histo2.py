@@ -119,6 +119,7 @@ model.add(Dense(50))
 model.add(Activation('tanh'))
 model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
+model.add(Dropout(0.5))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
