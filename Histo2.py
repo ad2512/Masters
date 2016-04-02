@@ -187,5 +187,5 @@ model.add(Activation('softmax'))
 sgd = SGD(lr=0.001, decay=1e-3, momentum=0.9, nesterov=True)
 Ada = Adadelta(lr=0.01, rho=0.95, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(all_data[0:400], labels[0:400], batch_size=10, nb_epoch=15,verbose=1,show_accuracy=True,validation_data=(all_data[400:539], labels[400:539]))
+model.fit(train_data, train_labels, batch_size=5, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
 
