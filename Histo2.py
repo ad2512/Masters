@@ -47,6 +47,7 @@ s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
 all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
+all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
 labels = np_utils.to_categorical(labels)
