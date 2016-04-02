@@ -28,6 +28,7 @@ from random import randint
 import cv2
 from collections import Counter
 import random
+
 # Setting up the Data
 A=662;
 l = float(genfromtxt("/home/silo1/ad2512/FIDO/L" + str(1) + ".csv",delimiter=','))
@@ -114,7 +115,7 @@ model.add(Activation('tanh'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.5))
 model.add(Flatten())
-model.add(Dense(1000))
+model.add(Dense(50))
 model.add(Activation('tanh'))
 model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
