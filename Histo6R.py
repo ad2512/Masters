@@ -33,7 +33,7 @@ import random
 A=144;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(1) + ".csv",delimiter=','))
 l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/2Reduced1.jpg')
+d = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced1.jpg')
 d1 = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
