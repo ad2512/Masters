@@ -68,7 +68,7 @@ for i in range(np.size(np.unique(labels))):
 	a=[];
 	b=[];
 	for j in range(np.size(labels)):
-		if(np.size(a)<25):
+		if(np.size(a)<24):
 			if(labels[j]==i):
 				a.extend([j])
 		else:
@@ -85,12 +85,13 @@ train_labels=[]
 train_data=[]
 test_labels=[]
 test_data=[]
+c = Counter(labels)
 
 for i in range(np.size(np.unique(labels))):
 	a=[];
 	b=[];
 	for j in range(np.size(labels)):
-		if(np.size(a)<25):
+		if(np.size(a)<prop*c[i]):
 			if(labels[j]==i):
 				a.extend([j])
 		else:
