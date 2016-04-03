@@ -121,7 +121,7 @@ model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
-RMS = RMSprop(lr=0.005, rho=0.7, epsilon=1e-08)
+RMS = RMSprop(lr=0.5, rho=0.7, epsilon=1e-08)
 Ada = Adadelta(lr=0.000001, rho=0.95, epsilon=1e-06)
 model.compile(loss='categorical_crossentropy', optimizer=RMS)
 model.fit(train_data, train_labels, batch_size=8, nb_epoch=200,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
