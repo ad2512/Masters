@@ -79,6 +79,28 @@ for i in range(np.size(np.unique(labels))):
 	test_labels.extend(labels[b])
 	test_data.extend(all_data[b])
 
+labels = train_labels
+all_data = train_data
+train_labels=[]
+train_data=[]
+test_labels=[]
+test_data=[]
+
+for i in range(np.size(np.unique(labels))):
+	a=[];
+	b=[];
+	for j in range(np.size(labels)):
+		if(np.size(a)<25):
+			if(labels[j]==i):
+				a.extend([j])
+		else:
+			if(labels[j]==i):
+				b.extend([j])
+	train_labels.extend(labels[a])	
+	train_data.extend(all_data[a])
+	test_labels.extend(labels[b])
+	test_data.extend(all_data[b])
+
 a = range(np.size(train_labels))
 b = scrambled(a)
 train_data = [train_data[i] for i in b]
