@@ -30,11 +30,11 @@ from collections import Counter
 import random
 
 # Setting up the Data
-A=144;
-l = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(1) + ".csv",delimiter=','))
-l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/LReduced" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/Reduced2.jpg')
+A=539;
+l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
+l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
+d = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM1.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM2.jpg')
 all_data=[d,d1]
 labels=[l,l1]
 for i in range(A-2):
@@ -68,7 +68,7 @@ for i in range(np.size(np.unique(labels))):
 	a=[];
 	b=[];
 	for j in range(np.size(labels)):
-		if(np.size(a)<prop*c[i]):
+		if(np.size(a)<25):
 			if(labels[j]==i):
 				a.extend([j])
 		else:
