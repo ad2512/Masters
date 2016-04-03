@@ -53,7 +53,7 @@ all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
 nb_classes = np.size(np.unique(labels))
-prop = 0.8;
+prop = 0.7;
 train_labels=[]
 train_data=[]
 test_labels=[]
