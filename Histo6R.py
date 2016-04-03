@@ -79,8 +79,8 @@ for i in range(np.size(np.unique(labels))):
 	test_labels.extend(labels[b])
 	test_data.extend(all_data[b])
 
-labels = train_labels
-all_data = train_data
+labels = np.asarray(train_labels)
+all_data = np.asarray(train_data)
 train_labels=[]
 train_data=[]
 test_labels=[]
