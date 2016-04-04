@@ -175,4 +175,3 @@ model.fit(train_data, train_labels, batch_size=8, nb_epoch=2,verbose=1,show_accu
 classes = model.predict_classes(all_data, batch_size=10)
 for i in range(539):
 	print(i,classes[i],labels_2[i])
-		np.savetxt(f, test_r[i].astype(int),delimiter=',',fmt='%s')
