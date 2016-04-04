@@ -114,6 +114,7 @@ print(c)
 c = Counter(test_labels)
 print(c)
 train_labels = np_utils.to_categorical(train_labels)
+test_labels_2 = test_labels
 test_labels = np_utils.to_categorical(test_labels)
 A=539;
 l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
@@ -137,7 +138,9 @@ all_data = all_data.reshape(A,3,s,s)
 all_data /= np.max(np.abs(all_data),axis=0)
 labels = np.asarray(labels)
 labels = labels.astype('int')
-# Building Model
+labels_2 = labels
+labels = np_utils.to_categorical(labels)
+
 # Building Model
 model = Sequential()
 model.add(Convolution2D(12,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
@@ -326,7 +329,7 @@ for i in range(24):
 	
 count = 0.0
 for i in range(24):
-	if(classes1_final[i]==test_labels[i]):
+	if(classes1_final[i]==test_labels_2[i]):
 		count = count + 1.0/24.0
 	
 print(count)
@@ -339,7 +342,7 @@ for i in range(539):
 	
 count = 0.0
 for i in range(539):
-	if(classes2_final[i]==labels[i]):
+	if(classes2_final[i]==labels_2[i]):
 		count = count + 1.0/539.0
 	
 print(count)
