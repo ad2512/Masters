@@ -174,11 +174,11 @@ model.fit(train_data, train_labels, batch_size=8, nb_epoch=2,verbose=1,show_accu
 
 classes = model.predict_classes(all_data, batch_size=10)
 c = Counter(classes)
-a=0
+a=0.0
 for i in range(539):
 	print(i,classes[i],labels[i])
 	if(classes[i]==labels[i]):
-		a = a+1
+		a = a+1.0
 
 print(c)
 print(a/539)
