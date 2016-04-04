@@ -30,26 +30,29 @@ from collections import Counter
 import random
 
 # Setting up the Data
-A=539;
-l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
-l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM2.jpg')
+A=539*10;
+l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + "a.csv",delimiter=','))
+l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + "b.csv",delimiter=','))
+d = cv2.imread('/home/silo1/ad2512/Histo_6/ZERONORM1a.jpg')
+d1 = cv2.imread('/home/silo1/ad2512/Histo_6/ZERONORM2b.jpg')
 all_data=[d,d1]
 labels=[l,l1]
-for i in range(A-2):
-	if((i+3)>A):
-		break
-	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/255NORM" + str(i+3) + ".jpg")
-	all_data.append(d)
-	labels.append(l)
+letters = ['a','b','c','d','e','f','g','h','i','j']
+for i in range(539):
+	ra=10;
+	if(i==0):
+		ra=8
+	for j in range(ra):
+		l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+1) + letters[9-j] + ".csv",delimiter=','))
+		d = cv2.imread("/home/silo1/ad2512/Histo_6/ZERONORM" + str(i+1) + letters[9-j] + ".jpg")
+		all_data.append(d)
+		labels.append(l)
 
 s = np.shape(all_data)[1]
 all_data = np.asarray(all_data)	
 all_data = all_data.astype('float32')
 all_data = all_data.reshape(A,3,s,s)
-all_data /= np.max(np.abs(all_data),axis=0)
+all_data /= 255.
 labels = np.asarray(labels)
 labels = labels.astype('int')
 nb_classes = np.size(np.unique(labels))
@@ -59,6 +62,8 @@ train_data=[]
 test_labels=[]
 test_data=[]
 c = Counter(labels)
+all_data2=all_data
+labels2=labels
 def scrambled(orig):
     dest = orig[:]
     random.shuffle(dest)
@@ -68,16 +73,11 @@ for i in range(np.size(np.unique(labels))):
 	a=[];
 	b=[];
 	for j in range(np.size(labels)):
-		if(np.size(a)<24):
+		if(np.size(a)<240):
 			if(labels[j]==i):
 				a.extend([j])
-		else:
-			if(labels[j]==i):
-				b.extend([j])
 	train_labels.extend(labels[a])	
 	train_data.extend(all_data[a])
-	test_labels.extend(labels[b])
-	test_data.extend(all_data[b])
 
 labels = np.asarray(train_labels)
 all_data = np.asarray(train_data)
@@ -115,28 +115,8 @@ c = Counter(test_labels)
 print(c)
 train_labels = np_utils.to_categorical(train_labels)
 test_labels = np_utils.to_categorical(test_labels)
-A=539;
-l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(1) + ".csv",delimiter=','))
-l1 = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(2) + ".csv",delimiter=','))
-d = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM1.jpg')
-d1 = cv2.imread('/home/silo1/ad2512/Histo_6/255NORM2.jpg')
-all_data=[d,d1]
-labels=[l,l1]
-for i in range(A-2):
-	if((i+3)>A):
-		break
-	l = float(genfromtxt("/home/silo1/ad2512/Histo_6/L" + str(i+3) + ".csv",delimiter=','))
-	d = cv2.imread("/home/silo1/ad2512/Histo_6/255NORM" + str(i+3) + ".jpg")
-	all_data.append(d)
-	labels.append(l)
-
-s = np.shape(all_data)[1]
-all_data = np.asarray(all_data)	
-all_data = all_data.astype('float32')
-all_data = all_data.reshape(A,3,s,s)
-all_data /= np.max(np.abs(all_data),axis=0)
-labels = np.asarray(labels)
-labels = labels.astype('int')
+all_data=all_data2
+labels=labels2
 # Building Model
 # Building Model
 model = Sequential()
@@ -169,16 +149,16 @@ sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
 RMS = RMSprop(lr=0.0000000005, rho=0.7, epsilon=1e-08)
 Ada = Adadelta(lr=0.0001, rho=0.95, epsilon=1e-08)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(train_data, train_labels, batch_size=8, nb_epoch=2000,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
+model.fit(train_data, train_labels, batch_size=10, nb_epoch=10,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
 
 
 classes = model.predict_classes(all_data, batch_size=10)
 c = Counter(classes)
 a=0.0
-for i in range(539):
+for i in range(5390):
 	print(i,classes[i],labels[i])
 	if(classes[i]==labels[i]):
 		a = a+1.0
 
 print(c)
-print(a/539)
+print(a/5390)
