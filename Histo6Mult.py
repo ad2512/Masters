@@ -151,7 +151,6 @@ Ada = Adadelta(lr=0.00001, rho=0.95, epsilon=1e-08)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
 model.fit(train_data, train_labels, batch_size=10, nb_epoch=5000,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
 
-
 classes = model.predict_classes(all_data, batch_size=10)
 c = Counter(classes)
 a=0.0
