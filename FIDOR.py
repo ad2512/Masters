@@ -68,7 +68,7 @@ for i in range(np.size(np.unique(labels))):
 	a=[];
 	b=[];
 	for j in range(np.size(labels)):
-		if(np.size(a)<58):
+		if(np.size(a)<149):
 			if(labels[j]==i):
 				a.extend([j])
 		else:
