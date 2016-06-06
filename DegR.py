@@ -171,7 +171,7 @@ sgd = SGD(lr=0.000001, decay=1e-6, momentum=0.9, nesterov=True)
 RMS = RMSprop(lr=0.0000000005, rho=0.7, epsilon=1e-08)
 Ada = Adadelta(lr=0.0001, rho=0.95, epsilon=1e-08)
 model.compile(loss='categorical_crossentropy', optimizer=Ada)
-model.fit(train_data, train_labels, batch_size=8, nb_epoch=2000,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
+model.fit(train_data, train_labels, batch_size=8, nb_epoch=1000,verbose=1,show_accuracy=True,validation_data=(test_data, test_labels))
 
 
 classes = model.predict_classes(all_data, batch_size=10)
