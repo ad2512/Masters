@@ -93,15 +93,7 @@ print(c)
 train_labels = np_utils.to_categorical(train_labels)
 test_labels = np_utils.to_categorical(test_labels)
 
-s = np.shape(all_data)[1]
-all_data = np.asarray(all_data)	
-all_data = all_data.astype('float32')
-all_data = all_data.reshape(A,3,s,s)
-all_data /= np.max(np.abs(all_data),axis=0)
-labels = np.asarray(labels)
-labels = labels.astype('int')
-
-
+# Building Model
 # Building Model
 model = Sequential()
 model.add(Convolution2D(12,3,3,init='uniform',border_mode='full',input_shape=(3,s,s)))
